@@ -298,4 +298,16 @@ RSpec.describe Pathname do
       expect(file/".DS_Store").to be_ds_store
     end
   end
+
+  describe "#write_env_script" do
+    it "escapes special characters in environment values" do
+      script = dst/"wrapper"
+      script.write_env_script "/bin/echo", FOO: "bar\"baz\\qux"
+
+      expect(File.read(script)).to eq <<~SH
+        #!/bin/bash
+        FOO="bar\"baz\\qux" exec "/bin/echo" "$@"
+      SH
+    end
+  end
 end

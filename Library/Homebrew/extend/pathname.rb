@@ -390,7 +390,10 @@ class Pathname
       args = nil
     end
     env_export = +""
-    env.each { |key, value| env_export << "#{key}=\"#{value}\" " }
+    env.each do |key, value|
+      escaped = value.to_s.gsub("\\", "\\\\").gsub('"', '\\"')
+      env_export << "#{key}=\"#{escaped}\" "
+    end
     dirname.mkpath
     write <<~SH
       #!/bin/bash
