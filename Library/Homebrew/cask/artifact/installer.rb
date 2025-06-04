@@ -26,8 +26,8 @@ module Cask
       # Extension module for script installers.
       module ScriptInstaller
         def install_phase(command: nil, **_)
-          # TODO: The `T.unsafe` is a false positive that is unnecessary in newer releasese of Sorbet
-          # (confirmend with sorbet v0.5.10672)
+          # TODO: The `T.unsafe` is a false positive that is unnecessary in newer releases of Sorbet
+          # (confirmed with sorbet v0.5.10672)
           ohai "Running #{T.unsafe(self.class).dsl_key} script '#{path}'"
 
           executable_path = staged_path_join_executable(path)
