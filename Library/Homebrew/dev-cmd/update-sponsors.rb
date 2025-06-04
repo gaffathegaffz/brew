@@ -29,7 +29,11 @@ module Homebrew
         largest_monthly_amount = T.let(0, T.untyped)
 
         GitHub.sponsorships("Homebrew").each do |s|
-          largest_monthly_amount = [s[:monthly_amount], s[:closest_tier_monthly_amount]].max
+        largest_monthly_amount = [
+          largest_monthly_amount,
+          s[:monthly_amount],
+          s[:closest_tier_monthly_amount]
+        ].max
           if largest_monthly_amount >= NAMED_MONTHLY_AMOUNT
             named_sponsors << "[#{sponsor_name(s)}](#{sponsor_url(s)})"
           end

@@ -75,6 +75,11 @@ RSpec.describe Utils do
       expect(described_class.pluralize("foo", 1, include_count: true)).to eq("1 foo")
       expect(described_class.pluralize("foo", 2, include_count: true)).to eq("2 foos")
     end
+
+    it "handles negative counts" do
+      expect(described_class.pluralize("foo", -1)).to eq("foos")
+      expect(described_class.pluralize("foo", -1, include_count: true)).to eq("-1 foos")
+    end
   end
 
   describe ".underscore" do

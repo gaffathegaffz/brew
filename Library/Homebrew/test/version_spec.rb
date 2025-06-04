@@ -59,7 +59,7 @@ RSpec.describe Version do
     end
   end
 
-  it "implicitlys converts to a string" do
+  it "implicitly converts to a string" do
     expect(String.try_convert(version)).to eq "1.2.3"
   end
 
